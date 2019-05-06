@@ -9,6 +9,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
     {
         // reference to the aeroplane that we're controlling
         private AeroplaneController m_Aeroplane;
+        public static bool playerIsAlive = true;
 
         private void Awake()
         {
@@ -29,7 +30,15 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             float throttle = airBrakes ? -1 : 1;
 
             // Pass the input to the aeroplane
-            m_Aeroplane.Move(roll, pitch, yaw, throttle, airBrakes);
+            if (playerIsAlive)
+            {
+                m_Aeroplane.Move(roll, pitch, yaw, throttle, airBrakes);
+            }
+            else
+            {
+                m_Aeroplane.Move(0, 0, 0, -1, true);
+            }
+           
         }
     }
 }

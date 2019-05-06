@@ -1,18 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityStandardAssets.Vehicles.Aeroplane;
 
-public class UIGameplayManager : MonoBehaviour
+public class UIGameplayManager : Singleton<UIGameplayManager>
 {
-    // Start is called before the first frame update
+    [Header("UISettings")]
+    public GameObject FirstPersonUI;
+    public AeroplaneController player;
+    public TextMeshProUGUI speedText;
+    public TextMeshProUGUI altitudeText;
+
+    CameraController camManager;
+
+    public override void Awake()
+    {
+        base.Awake();
+    }
+
     void Start()
     {
-        
+        camManager = CameraController.Get();
+        speedText.text = "0000";
+        altitudeText.text = "0000";
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        speedText.text = player.ForwardSpeed.ToString();
+        altitudeText.text = player.Altitude.ToString();
+        FirstPersonUI.SetActive(camManager.firstPersonMode);
     }
 }
+
+

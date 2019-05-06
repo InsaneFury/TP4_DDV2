@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Limiter : MonoBehaviour
+public class Limiter : Singleton<Limiter>
 {
-    bool playerIsOutsideTheLimit = false;
+    public bool playerIsOutsideTheLimit = false;
+
+    public override void Awake()
+    {
+        base.Awake();
+    }
 
     private void OnTriggerExit(Collider other)
     {
@@ -12,15 +17,6 @@ public class Limiter : MonoBehaviour
         {
             playerIsOutsideTheLimit = true;
             Debug.Log("Player are outside the limit");
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerIsOutsideTheLimit = false;
-            Debug.Log("Player are inside the limit");
         }
     }
 }
