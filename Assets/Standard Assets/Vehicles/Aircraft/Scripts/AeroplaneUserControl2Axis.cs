@@ -24,7 +24,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             float roll = Input.GetAxis("Mouse X");
             float pitch = Input.GetAxis("Mouse Y");
             float yaw = Input.GetAxis("Horizontal");
-            bool airBrakes = Input.GetButton("Fire1");
+            bool airBrakes = Input.GetButton("Fire2");
 
             // auto throttle up, or down if braking.
             float throttle = airBrakes ? -1 : 1;

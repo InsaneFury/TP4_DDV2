@@ -6,8 +6,8 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 {
     public class ExplosionController : Singleton<ExplosionController>
     {
-        public Limiter limit;
         public ParticleSystem explosion;
+        public GameObject gameOver;
 
         public override void Awake()
         {
@@ -16,11 +16,15 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
 
         void Update()
         {
-            if (limit.playerIsOutsideTheLimit)
+            if (Limiter.Get().playerIsOutsideTheLimit)
             {
                 explosion.Play();
-                limit.playerIsOutsideTheLimit = false;
+                Limiter.Get().playerIsOutsideTheLimit = false;
                 AeroplaneUserControl2Axis.playerIsAlive = false;
+                gameOver.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                UIGameplayManager.Get().gameOver = true;
             }
         }
     }

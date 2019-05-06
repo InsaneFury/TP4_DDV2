@@ -11,8 +11,9 @@ public class UIGameplayManager : Singleton<UIGameplayManager>
     public AeroplaneController player;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI altitudeText;
+    public bool gameOver = false;
 
-    CameraController camManager;
+    CameraManager camManager;
 
     public override void Awake()
     {
@@ -21,15 +22,15 @@ public class UIGameplayManager : Singleton<UIGameplayManager>
 
     void Start()
     {
-        camManager = CameraController.Get();
+        camManager = CameraManager.Get();
         speedText.text = "0000";
         altitudeText.text = "0000";
     }
 
     void Update()
     {
-        speedText.text = player.ForwardSpeed.ToString();
-        altitudeText.text = player.Altitude.ToString();
+        speedText.text = Mathf.Round(player.ForwardSpeed).ToString();
+        altitudeText.text = Mathf.Round(player.Altitude).ToString();
         FirstPersonUI.SetActive(camManager.firstPersonMode);
     }
 }

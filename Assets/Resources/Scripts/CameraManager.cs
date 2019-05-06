@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : Singleton<CameraController>
+public class CameraManager : Singleton<CameraManager>
 {
     [Header("Settings")]
     public GameObject firstCam;
